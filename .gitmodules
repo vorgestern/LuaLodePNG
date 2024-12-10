@@ -1,0 +1,3 @@
+[submodule "LuaAide"]
+	path = LuaAide
+	url = http://github.com/vorgestern/LuaAide.git
