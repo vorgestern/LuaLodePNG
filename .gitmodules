@@ -1,3 +1,6 @@
 [submodule "LuaAide"]
 	path = LuaAide
 	url = http://github.com/vorgestern/LuaAide.git
+[submodule "lodepng"]
+	path = lodepng
+	url = https://github.com/lvandeve/lodepng.git
