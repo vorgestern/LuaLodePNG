@@ -1,6 +1,6 @@
 
 XFILES   := main
-CPPFLAGS := -I/usr/include/lua5.4 -I LuaAide/include
+CPPFLAGS := -I/usr/include/lua5.4 -ILuaAide/include -Ilodepng
 CXXFLAGS := --std=c++20 -Wall -Werror
 .PHONY: clean dir
 
@@ -18,8 +18,11 @@ LuaAide/libLuaAide.a:
 
 # ============================================================
 
-lualodepng.so: b/main.o LuaAide/libLuaAide.a
+lualodepng.so: b/main.o b/lodepng.o LuaAide/libLuaAide.a
 	g++ -shared -fpic -o $@ $^
+
+b/lodepng.o: lodepng/lodepng.cpp lodepng/lodepng.h
+	g++ -c -Wall -Werror -fpic -o $@ $< $(CPPFLAGS) $(CXXFLAGS)
 
 b/%.o: src/%.cpp LuaAide/include/LuaAide.h
 	g++ -c -Wall -Werror -fpic -o $@ $< $(CPPFLAGS) $(CXXFLAGS)
