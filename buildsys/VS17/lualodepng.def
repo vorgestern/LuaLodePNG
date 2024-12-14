@@ -1,0 +1,4 @@
+LIBRARY lodepng.dll
+VERSION 0.9
+EXPORTS
+luaopen_lodepng

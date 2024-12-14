@@ -119,11 +119,11 @@ namespace {
 
 } // anon
 
-#ifndef LUALODEPNG_EXPORTS
-#define LUALODEPNG_EXPORTS
+#ifndef LODEPNG_EXPORTS
+#define LODEPNG_EXPORTS
 #endif
 
-extern "C" LUALODEPNG_EXPORTS int luaopen_lualodepng(lua_State*L)
+extern "C" LODEPNG_EXPORTS int luaopen_lodepng(lua_State*L)
 {
     LuaStack Q(L);
 
