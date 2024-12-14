@@ -42,8 +42,8 @@ namespace {
         LuaStack Q(L);
         Q.argcheck(1, isimage, "image");
         const myimage*I=*reinterpret_cast<myimage**>(lua_touserdata(Q, 1));
-//      cout<<"Hier ist mytostring "<<Q<<"\n";
-//      printf("myimage pointer=%p\n", I);
+        // cout<<"Hier ist mytostring "<<Q<<"\n";
+        // printf("myimage pointer=%p\n", I);
         char pad[100];
         const size_t nw=snprintf(pad, sizeof(pad), "%u x %u", I->width, I->height);
         return Q<<string_view {pad, nw}, 1;
@@ -62,7 +62,7 @@ namespace {
 
     int myfinaliser(lua_State*L)
     {
-printf("myfinaliser\n");
+        // printf("myfinaliser\n");
         LuaStack Q(L);
         if (Q.hasheavyuserdataat(-1))
         {
