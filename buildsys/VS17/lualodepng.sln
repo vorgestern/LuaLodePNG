@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LuaAide", "..\..\LuaAide\bu
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lualodepng", "lualodepng.vcxproj", "{CC7D485E-E660-4C77-A065-BC28759881DD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ulutest", "..\..\ulutest\buildsys\VS17\ulutest.vcxproj", "{915EEE1A-9B0E-4AE0-B50B-A305658DCFBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{CC7D485E-E660-4C77-A065-BC28759881DD}.Release|x64.Build.0 = Release|x64
 		{CC7D485E-E660-4C77-A065-BC28759881DD}.Release|x86.ActiveCfg = Release|Win32
 		{CC7D485E-E660-4C77-A065-BC28759881DD}.Release|x86.Build.0 = Release|Win32
+		{915EEE1A-9B0E-4AE0-B50B-A305658DCFBE}.Debug|x64.ActiveCfg = Debug|x64
+		{915EEE1A-9B0E-4AE0-B50B-A305658DCFBE}.Debug|x64.Build.0 = Debug|x64
+		{915EEE1A-9B0E-4AE0-B50B-A305658DCFBE}.Debug|x86.ActiveCfg = Debug|Win32
+		{915EEE1A-9B0E-4AE0-B50B-A305658DCFBE}.Debug|x86.Build.0 = Debug|Win32
+		{915EEE1A-9B0E-4AE0-B50B-A305658DCFBE}.Release|x64.ActiveCfg = Release|x64
+		{915EEE1A-9B0E-4AE0-B50B-A305658DCFBE}.Release|x64.Build.0 = Release|x64
+		{915EEE1A-9B0E-4AE0-B50B-A305658DCFBE}.Release|x86.ActiveCfg = Release|Win32
+		{915EEE1A-9B0E-4AE0-B50B-A305658DCFBE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

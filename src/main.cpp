@@ -143,7 +143,7 @@ extern "C" LODEPNG_EXPORTS int luaopen_lodepng(lua_State*L)
     
     Q   <<LuaTable()
         <<"0.1">>LuaField("version")
-        <<"https://github.com/vorgestern/LuaLodePng.git">>LuaField("url")
+        <<"https://github.com/vorgestern/LuaLodePNG.git">>LuaField("url")
         <<LuaTable()
             <<LODEPNG_VERSION_STRING>>LuaField("version")
             >>LuaField("lodepng")
