@@ -4,3 +4,6 @@
 [submodule "lodepng"]
 	path = lodepng
 	url = https://github.com/lvandeve/lodepng.git
+[submodule "ulutest"]
+	path = ulutest
+	url = https://github.com/vorgestern/ulutest.git
