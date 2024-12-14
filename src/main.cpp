@@ -5,6 +5,28 @@
 #include <memory>
 #include <iostream>
 
+// decode         encode
+// ======         ======
+// from file      to file
+// from memory    to memory
+// lodepng_decode lodepng_encode    stateful
+// lodepng_inspect
+
+// LodePNGColorMode (colortype, bitdepth, paletteninfo) (construction, destruction, copy)
+// - getter
+// - add/clear palette
+
+// LodePNGInfo (ancillary chunks) (construction, destruction, copy)
+// - text chunks
+// - icc profile
+
+// lodepng_convert(): convert colortype
+
+// chunk processing
+// lodepng_chunk_next Iteration
+
+// compression
+
 using namespace std;
 
 namespace {
