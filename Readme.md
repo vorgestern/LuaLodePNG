@@ -34,13 +34,14 @@ creates lodepng.so and executes unit test.
 Copy the shared object to where Lua will find it with `require "lodepng"`.
 
 ## Windows
-Build with Visual Studio 2022 (VS17)
-The Release build (32 bits) will create lodepng.dll in the repository root directory,
-the Debug build in buildsys/VS17/Debug. Copy the DLL to where Lua will find it with
-`require "lodepng"`.
+Build with Visual Studio 2022 (VS17).<br/>
 Execute unit test with
 
     lua unittest.lua
+
+The Release build (32 bit) will create lodepng.dll in the repository root directory,
+the Debug build in buildsys/VS17/Debug. Copy the DLL to where Lua will find it with
+`require "lodepng"`.
 
 # Status
 Version 0.1 Preliminary - under development
