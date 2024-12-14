@@ -117,6 +117,49 @@ namespace {
         return myconstructor(Q, out, width, height, colortype);
     }
 
+    int chunklist(lua_State*L)
+    {
+        LuaStack Q(L);
+        Q.argcheck(1, LuaType::TSTRING, "filename");
+        // unsigned lodepng_load_file(unsigned char**out, size_t*outsize, const char*filename);
+        unsigned char*out=nullptr;
+        size_t outsize=0;
+        const auto filename=Q.tostring(1);
+        if (const auto rc=lodepng_load_file(&out, &outsize, filename.c_str()); rc!=0)
+        {
+            char pad[100];
+            snprintf(pad, sizeof pad, "load_file fails with rc=%d (data=%p, %u)", rc, out, outsize);
+            return Q<<pad>>luaerror;
+        }
+        // const unsigned char*lodepng_chunk_next_const(const unsigned char*chunk, const unsigned char*end);
+        Q<<LuaTable();
+        const auto end=out+outsize;
+        unsigned chunknum=0;
+        for (const unsigned char*chunk=out+8; chunk<end; chunk=lodepng_chunk_next_const(chunk, end))
+        {
+            const auto len=lodepng_chunk_length(chunk);
+            char chunktype[5];
+            lodepng_chunk_type(chunktype, chunk);
+            // printf("chunk %s: %u bytes\n", chunktype, len);
+
+            Q<<LuaTable()
+                <<chunktype>>LuaField("type")
+                <<len>>LuaField("len")
+                <<(size_t)(chunk-(out+8))>>LuaField("offset")
+
+                <<LuaTable()
+                    <<(lodepng_chunk_ancillary(chunk)?"ancillary":"critical")>>LuaField("essential")
+                    <<(lodepng_chunk_private(chunk)?"private":"public")>>LuaField("visible")
+                    <<(lodepng_chunk_safetocopy(chunk)?true:false)>>LuaField("copyable")
+                    <<(lodepng_chunk_check_crc(chunk)==0?true:false)>>LuaField("crc_ok")
+                    >>LuaField("props")
+                >>LuaElement({-2,++chunknum});
+        }
+
+        free(out);
+        return 1;
+    }
+
 } // anon
 
 #ifndef LODEPNG_EXPORTS
@@ -147,7 +190,8 @@ extern "C" LODEPNG_EXPORTS int luaopen_lodepng(lua_State*L)
         <<LuaTable()
             <<LODEPNG_VERSION_STRING>>LuaField("version")
             >>LuaField("lodepng")
-        <<readfile>>LuaField("readfile");
+        <<readfile>>LuaField("readfile")
+        <<chunklist>>LuaField("chunklist")
     ;
     return 1;
 }
