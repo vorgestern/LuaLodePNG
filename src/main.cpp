@@ -31,7 +31,7 @@ using namespace std;
 
 namespace {
 
-    const auto modulename="github.com/vorgester/LuaLodePng";
+    const auto modulename="github.com/vorgestern/LuaLodePng";
     const auto mtimage_name="mtimage";
     const void*mtimage_pointer=nullptr; // identify metatable via lua_topointer()
 
