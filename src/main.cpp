@@ -128,7 +128,7 @@ namespace {
         if (const auto rc=lodepng_load_file(&out, &outsize, filename.c_str()); rc!=0)
         {
             char pad[100];
-            snprintf(pad, sizeof pad, "load_file fails with rc=%d (data=%p, %u)", rc, out, outsize);
+            snprintf(pad, sizeof pad, "load_file fails with rc=%d (data=%p, %lu)", rc, out, outsize);
             return Q<<pad>>luaerror;
         }
         // const unsigned char*lodepng_chunk_next_const(const unsigned char*chunk, const unsigned char*end);
@@ -144,8 +144,8 @@ namespace {
 
             Q<<LuaTable()
                 <<chunktype>>LuaField("type")
-                <<len>>LuaField("len")
-                <<(size_t)(chunk-(out+8))>>LuaField("offset")
+                <<(int)len>>LuaField("len")
+                <<(int)(chunk-(out+8))>>LuaField("offset")
 
                 <<LuaTable()
                     <<(lodepng_chunk_ancillary(chunk)?"ancillary":"critical")>>LuaField("essential")
