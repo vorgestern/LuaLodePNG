@@ -25,15 +25,21 @@ LuaLodePNG is a Lua binding to lodepng (https://github.com/lvandeve/lodepng)
 + [LuaAide](https://github.com/vorgestern/LuaAide)
 + [ulutest](https://github.com/vorgestern/ulutest)
 
-# How to build
-## Linux
+# How to build: First ...
+
+    git submodule init
+    git submodule update
+
+## then on Linux ...
 
     make
 
 creates lodepng.so and executes unit test.
 Copy the shared object to where Lua will find it with `require "lodepng"`.
 
-## Windows
+## else on Windows ...
+
+Edit buildsys/VS17/Lua.props to point to your installation of Lua.
 Build with Visual Studio 2022 (VS17).<br/>
 Execute unit test with
 
