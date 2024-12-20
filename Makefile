@@ -6,7 +6,7 @@ CXXFLAGS := --std=c++20 -Wall -Werror
 
 all: dir lodepng.so LuaAide/libLuaAide.a ulutest/ulutest.so test
 clean:
-	@rm -rf b/* lualodepng.so
+	@rm -rf b/* lodepng.so
 	@make -C LuaAide clean
 	@make -C ulutest clean
 dir:
@@ -24,7 +24,7 @@ ulutest/ulutest.so:
 
 # ============================================================
 
-lodepng.so: b/main.o b/colortype.o b/lodepng.o LuaAide/libLuaAide.a
+lodepng.so: b/main.o b/image.o b/colortype.o b/lodepng.o LuaAide/libLuaAide.a
 	g++ -shared -fpic -o $@ $^
 
 b/lodepng.o: lodepng/lodepng.cpp lodepng/lodepng.h
@@ -37,3 +37,15 @@ b/%.o: src/%.cpp src/lualodepng.h LuaAide/include/LuaAide.h
 
 test: lodepng.so
 	lua unittest.lua
+
+# More enums
+# LodePNGFilterStrategy
+
+# Structs
+# LodePNGColorMode
+# LodePNGTime
+# LodePNGInfo
+# LodePNGDecoderSettings
+# LodePNGColorStats
+# LodePNGEncoderSettings
+# LodePNGState

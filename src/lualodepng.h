@@ -7,4 +7,7 @@ struct mtinfo
     const void*ident{nullptr};
 };
 
+int mkimage(lua_State*);
+int myconstructor(LuaStack&, unsigned char*pixels, unsigned width, unsigned height, LodePNGColorType colortype);
+
 int mkcolortype(lua_State*);
