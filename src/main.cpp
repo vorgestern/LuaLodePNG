@@ -4,6 +4,7 @@
 #include <lodepng.h>
 #include <memory>
 #include <iostream>
+#include "lualodepng.h"
 
 // decode         encode
 // ======         ======
@@ -31,16 +32,14 @@ using namespace std;
 
 namespace {
 
-    const auto modulename="github.com/vorgestern/LuaLodePng";
-    const auto mtimage_name="mtimage";
-    const void*mtimage_pointer=nullptr; // identify metatable via lua_topointer()
+    mtinfo mtimage={"mtimage", nullptr};
 
     const auto deleter=[](unsigned char*X)
     {
         printf("delete pixels %p\n", X);
         free(X);
     };
-    using mypixels=std::unique_ptr<unsigned char,void(*)(unsigned char*)>;
+    using mypixels=unique_ptr<unsigned char,void(*)(unsigned char*)>;
 
     struct myimage
     {
@@ -56,7 +55,7 @@ namespace {
         if (!lua_getmetatable(L, index)) return false;
         const void*p=lua_topointer(L, -1);
         Q.drop(1);
-        return p==mtimage_pointer;
+        return p==mtimage.ident;
     }
 
     int mytostring(lua_State*L)
@@ -75,7 +74,7 @@ namespace {
     {
         // Create userdata of type myimage**
         auto P=reinterpret_cast<myimage**>(lua_newuserdatauv(Q, sizeof(myimage*), 0));
-        Q<<LuaValue(LUA_REGISTRYINDEX)<<LuaField(modulename)<<LuaField(mtimage_name)<<luarot3;
+        Q<<LuaValue(LUA_REGISTRYINDEX)<<LuaField(modulename)<<LuaField(mtimage.name)<<luarot3;
         Q.drop(2);
         lua_setmetatable(Q, -2);
         *P=new myimage {{pixels,deleter}, width, height, colortype};
@@ -172,18 +171,19 @@ extern "C" LODEPNG_EXPORTS int luaopen_lodepng(lua_State*L)
 
     // Create registry entry for lualodepng
     Q<<LuaValue(LUA_REGISTRYINDEX)<<newtable>>LuaField(modulename);
+
     // Create metatable for images.
     Q<<LuaValue(LUA_REGISTRYINDEX)<<LuaField(modulename)
             <<newtable
                 <<"image">>LuaMetaMethod::name
                 <<myfinaliser>>LuaMetaMethod::gc
-                <<mytostring>>LuaMetaMethod::tostring
-                ;
-    mtimage_pointer=lua_topointer(L, -1);
-    Q       >>LuaField(mtimage_name);
+                <<mytostring>>LuaMetaMethod::tostring;
+    mtimage.ident=lua_topointer(L, -1);
+    Q       >>LuaField(mtimage.name);
 
     // =================================================================
-    
+
+    // Create module table to return on the stack.
     Q   <<LuaTable()
         <<"0.1">>LuaField("version")
         <<"https://github.com/vorgestern/LuaLodePNG.git">>LuaField("url")

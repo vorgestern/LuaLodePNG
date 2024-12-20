@@ -30,10 +30,10 @@ lodepng.so: b/main.o b/lodepng.o LuaAide/libLuaAide.a
 b/lodepng.o: lodepng/lodepng.cpp lodepng/lodepng.h
 	g++ -c -Wall -Werror -fpic -o $@ $< $(CPPFLAGS) $(CXXFLAGS)
 
-b/%.o: src/%.cpp LuaAide/include/LuaAide.h
+b/%.o: src/%.cpp src/lualodepng.h LuaAide/include/LuaAide.h
 	g++ -c -Wall -Werror -fpic -o $@ $< $(CPPFLAGS) $(CXXFLAGS)
 
 # ============================================================
 
-test:
+test: lodepng.so
 	lua unittest.lua
