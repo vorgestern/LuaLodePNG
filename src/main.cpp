@@ -192,6 +192,7 @@ extern "C" LODEPNG_EXPORTS int luaopen_lodepng(lua_State*L)
             >>LuaField("lodepng")
         <<readfile>>LuaField("readfile")
         <<chunklist>>LuaField("chunklist")
+        <<mkcolortype>>1; Q>>LuaField("colortype")
     ;
     return 1;
 }

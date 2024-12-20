@@ -42,6 +42,34 @@ ULU.RUN(
     name="lodepng.version",
     TT("present", function(T) T:ASSERT_EQ("string", type(X.lodepng.version)) end),
     TT("value", function(T) T:ASSERT_EQ("20241015", X.lodepng.version) end)
+},
+
+{
+    name="colortype",
+    TT("present", function(T)
+        T:ASSERT_EQ("table", type(X.colortype))
+    end),
+    TT("values", function(T)
+        T:ASSERT(X.colortype.LCT_GREY)
+        T:ASSERT(X.colortype.LCT_RGB)
+        T:ASSERT(X.colortype.LCT_PALETTE)
+        T:ASSERT(X.colortype.LCT_GREY_ALPHA)
+        T:ASSERT(X.colortype.LCT_RGBA)
+    end),
+    TT("tostring", function(T)
+        T:ASSERT_EQ("LCT_GREY", tostring(X.colortype.LCT_GREY))
+        T:ASSERT_EQ("LCT_RGB", tostring(X.colortype.LCT_RGB))
+        T:ASSERT_EQ("LCT_PALETTE", tostring(X.colortype.LCT_PALETTE))
+        T:ASSERT_EQ("LCT_GREY_ALPHA", tostring(X.colortype.LCT_GREY_ALPHA))
+        T:ASSERT_EQ("LCT_RGBA", tostring(X.colortype.LCT_RGBA))
+    end),
+    TT("numeric", function(T)
+        T:ASSERT_EQ(0, X.colortype.LCT_GREY:numeric())
+        T:ASSERT_EQ(2, X.colortype.LCT_RGB:numeric())
+        T:ASSERT_EQ(3, X.colortype.LCT_PALETTE:numeric())
+        T:ASSERT_EQ(4, X.colortype.LCT_GREY_ALPHA:numeric())
+        T:ASSERT_EQ(6, X.colortype.LCT_RGBA:numeric())
+    end)
 }
 
 )
