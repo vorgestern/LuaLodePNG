@@ -24,7 +24,7 @@ end
 
 local TT=ULU.TT
 
-ULU.RUN(
+ULU.RUN {
 
 {
     name="version",
@@ -72,4 +72,4 @@ ULU.RUN(
     end)
 }
 
-)
+}
